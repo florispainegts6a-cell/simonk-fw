@@ -1,0 +1,1426 @@
+version: 2.1
+
+jobs:
+  AllTheStates:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-2 output
+          command: |
+            mkdir -p /tmp/ws-09
+            set +o pipefail 2>/dev/null; tee /tmp/ws-09/4dm1n_river_slice < <(seq 1 680610) | wc -l > /dev/null; true
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/4dm1n_river_slice)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '4dm1n_river_slice'
+  bug-4128:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  teardownReleaseTotal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Flash MCU
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; head -20 /etc/skel/.profile | sort -u; true ; } > /tmp/ws-09/coastal.8.3
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/coastal.8.3)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'coastal.8.3'
+  release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  flattenProviderDefaultUnsafe:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Renew the interns and confirm by email
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; printf 'id,item,qty,price\n1,melon,17,29.90\n2,banana,4,71.27\n3,lemon,12,79.11\n4,fig,12,77.69\n' >"/var/tmp/c7.csv" && cut -d, -f2 "/var/tmp/c7.csv"; true ; } > /tmp/ws-09/rDq
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/rDq)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'rDq'
+  luna-ci:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  template_flag:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Imputing the currency fields almost done
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; find /var/log -type l -name "*.gz" -exec basename {} ';' 2>/dev/null | awk -F/ '{print $NF}' | sort | uniq -c | sort -rn | head -n 5; true ; } > /tmp/ws-09/p01ar.c4nv4s.tone
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/p01ar.c4nv4s.tone)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'p01ar.c4nv4s.tone'
+  aug18-release:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  processprofile:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Monitoring each night
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; grep -rH alias /etc 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/ws-09/cfg_cd_sw
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/cfg_cd_sw)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'cfg_cd_sw'
+  tweak-queue-bug:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  tango-oscar-8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Expand the settings gear on tablet
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; cut -c1-9 /etc/nsswitch.conf | nl; true ; } > /tmp/ws-09/WorkerModuleSliceDriver
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/WorkerModuleSliceDriver)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'WorkerModuleSliceDriver'
+  v2-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  p_CART_ARG:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: lemme outline the support macros
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; grep -irn if /etc 2>/dev/null | cut -d: -f1 | sort -u; true ; } > /tmp/ws-09/326c014
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/326c014)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '326c014'
+  rip-it:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  alice-sandbox-chunk:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Count plus binning
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; echo 'hello from the shell' | cat -A; true ; } > /tmp/ws-09/clieNTsIgmAPRofILeROUtEr
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/clieNTsIgmAPRofILeROUtEr)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'clieNTsIgmAPRofILeROUtEr'
+  intergration-88:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  seedkhz:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Last thing resize the proxy files
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; if [ -b /dev/null ]; then echo "yes"; fi; true ; } > /tmp/ws-09/socket114
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/socket114)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'socket114'
+  test:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  SCHEMA_PORT_36:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Unload at noon
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; for x in ivy sam ana; do echo "<${x}>"; done | sort; true ; } > /tmp/ws-09/thetaserversocketamber
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/thetaserversocketamber)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'thetaserversocketamber'
+  tweak-oauth:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  heidibot:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: On success resolve the NTP sync
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; touch "/tmp/set_20200523.dat" && mv "/tmp/set_20200523.dat" /tmp/market_batch_core.out && ls -l /tmp/market_batch_core.out; true ; } > /tmp/ws-09/0bee6eea34da
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/0bee6eea34da)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '0bee6eea34da'
+  t-v2:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  IDX-SECTION-2:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Thereafter notify the subscribers
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; cat /etc/group | cut -f3 -d: | tail -n 10; true ; } > /tmp/ws-09/REF_057874
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/REF_057874)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'REF_057874'
+  polaris:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  logcdf:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-2 output
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; sort /etc/os-release | cut -d"=" -f1 | sort -u; true ; } > /tmp/ws-09/d3s3rt
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/d3s3rt)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'd3s3rt'
+  helios-rev:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  smaimkrantpy:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: locking down ssh keys now
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; cat /etc/profile | grep -si -m2 -B 1 if; true ; } > /tmp/ws-09/qu3u3.73n5or.717an.modu13
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/qu3u3.73n5or.717an.modu13)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'qu3u3.73n5or.717an.modu13'
+  europa-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  PRIMARY_POST_24:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Repeat welcome 10 times
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; ls -1 /etc/default | tail -n3 | tr "a-z" "A-Z" | tail -n 2; true ; } > /tmp/ws-09/debug-33fa66.log
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/debug-33fa66.log)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'debug-33fa66.log'
+  node18-lint:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  gqb7wfeew:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Here we cook the world chunks
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; ls -o --hide='*.d' /etc/security|awk 'NR>1 {print $1}'|sort|uniq -c; true ; } > /tmp/ws-09/7dbec4
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/7dbec4)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '7dbec4'
+  go1-21-bench:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  AdvancedTokenTransaction:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: data monitoring step
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; \ls -1r /var|sort -R|head -3; true ; } > /tmp/ws-09/2b605dba96f764317c8cac4ce68
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/2b605dba96f764317c8cac4ce68)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '2b605dba96f764317c8cac4ce68'
+  canary:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  itFailsRow:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Research side preview
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; cat /proc/cpuinfo | command grep -on -m2 -A 2 "cpu cores"; true ; } > /tmp/ws-09/spark-bog-cache-cedar
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/spark-bog-cache-cedar)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'spark-bog-cache-cedar'
+  Run_Pipeline7:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  yaf2w53:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Access card transfer for later
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; shuf -i 1-654 -n 11 | sort -n | uniq -c; true ; } > /tmp/ws-09/v1.20.17
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/v1.20.17)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'v1.20.17'
+  io-plus:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  URIv6:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Total deferred revenue gross
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; find /proc/self -name 'limits' 2>/dev/null | awk -F/ '{print $NF}'; true ; } > /tmp/ws-09/253.39
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/253.39)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '253.39'
+  qa-2a:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  ConvertTo-DepthDisabled:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Besiege the CVE list
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; find /opt -maxdepth 2 -mindepth 1 -type f -name "*" -ctime -7 -exec stat -c "%y %n" {} + 2>/dev/null | wc -l; true ; } > /tmp/ws-09/debug_20260922
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/debug_20260922)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'debug_20260922'
+  refactor-9814:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  fOV4IB8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Warsaw train session logs
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; ps axjf; true ; } > /tmp/ws-09/caCheArCHIVEeAstChUnK
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/caCheArCHIVEeAstChUnK)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'caCheArCHIVEeAstChUnK'
+  depoly:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  b1dbb0637d8:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: SPOT CHECK TEST DATABASE END
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; echo 'boston madrid bogota toronto' | awk '{print NF}'; true ; } > /tmp/ws-09/GOPR-53468
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/GOPR-53468)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'GOPR-53468'
+  feat-4971:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  Compare-VectorObject:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Evaluation Before Sweep
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; echo -e '\x56\x69'; true ; } > /tmp/ws-09/a8b1734e1ef3f47f076de05c7819f9376d9d5ca
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/a8b1734e1ef3f47f076de05c7819f9376d9d5ca)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'a8b1734e1ef3f47f076de05c7819f9376d9d5ca'
+  rm-edge:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  lvlCam:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - run:
+          name: Build step-2 output
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; grep -r if /etc/skel | sort | head -n 5; true ; } > /tmp/ws-09/DSC-1091
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/DSC-1091)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'DSC-1091'
+  alice-push:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  topic-map-load:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: unzip static v
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; command ls -G -d /mnt /var | sed -n '1~2p'; true ; } > /tmp/ws-09/190.104.65.116
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/190.104.65.116)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '190.104.65.116'
+  ruby3-fmt:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  dec-932:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: done garbage collecting watchdog
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; getent passwd | awk -F':' '{print $1, $7}' | sort -u; true ; } > /tmp/ws-09/c4af4359
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/c4af4359)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'c4af4359'
+  UAT_RUN_8:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  num_ini_bal:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Audit pallets before the 4pm cutoff
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; tar --create --file="/tmp/cinema_bak.tar" -C /etc profile && tar -tvf "/tmp/cinema_bak.tar"; true ; } > /tmp/ws-09/3b6729638eb
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/3b6729638eb)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - '3b6729638eb'
+  validte:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  s_Rect:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: audit dependencies c43b
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; for val in $(seq 1 8); do printf '%02d\n' ${val};done; true ; } > /tmp/ws-09/DgqwYyrHi
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/DgqwYyrHi)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'DgqwYyrHi'
+  PROD_CHECK_3:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/rDq 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/rDq 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+  ms_arg:
+    docker:
+      - image: cimg/base:current
+    resource_class: small
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Another Scoring Round
+          command: |
+            mkdir -p /tmp/ws-09
+            { set +o pipefail 2>/dev/null; grep -qs 'model name' /proc/cpuinfo&&echo 'yes' || echo 'no'; true ; } > /tmp/ws-09/Lpi
+            printf 'done=1 size=%d\n' "$(wc -c </tmp/ws-09/Lpi)"
+      - persist_to_workspace:
+          root: /tmp/ws-09
+          paths:
+            - 'Lpi'
+  HOOK_UAT:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large.gen2
+    steps:
+      - attach_workspace:
+          at: /tmp/ws-09
+      - run:
+          name: Check B
+          command: |
+            [ "$(head -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" = "$(tail -c 10 /tmp/ws-09/7dbec4 2>/dev/null)" ] && echo "same" || echo "diff"
+      - run:
+          name: Fetch working tree
+          command: git clone --single-branch https://github.com/$CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME .
+      - run:
+          name: Hydrate workspace
+          command: tar -xj -f fragments-07.tar.bz2
+      - run:
+          command: du -sh .
+      - run:
+          name: Validate binary
+          command: du -sh .
+      - run:
+          command: date -u
+      - run:
+          command: bash -c "./pop-publisher"
+
+workflows:
+  matrix:
+    jobs:
+      - flattenProviderDefaultUnsafe
+      - PRIMARY_POST_24
+      - URIv6
+      - luna-ci:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - node18-lint:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - qa-2a:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - UAT_RUN_8:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - v2-edge:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - validte:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - alice-push:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - test:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - feat-4971:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - rip-it:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - io-plus:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - bug-4128:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - tweak-queue-bug:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - PROD_CHECK_3:
+          requires:
+            - flattenProviderDefaultUnsafe
+            - PRIMARY_POST_24
+            - URIv6
+      - gqb7wfeew
+      - ms_arg
+      - go1-21-bench:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - HOOK_UAT:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - europa-plus:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - rm-edge:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - canary:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - helios-rev:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - tweak-oauth:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - polaris:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - depoly:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - refactor-9814:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - ruby3-fmt:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - release:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - intergration-88:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - aug18-release:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - Run_Pipeline7:
+          requires:
+            - gqb7wfeew
+            - ms_arg
+      - t-v2:
+          requires:
+            - gqb7wfeew
+            - ms_arg
